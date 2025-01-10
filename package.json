@@ -1,0 +1,17 @@
+{
+  "name": "simple-simple-vue-compiler",
+  "version": "1.0.0",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "node test.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "Simple lib to compile Vue SFC to JS",
+  "dependencies": {
+    "hash-sum": "^2.0.0",
+    "vue": "^3.5.13"
+  }
+}

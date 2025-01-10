@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script type="module">
+    import {
+      toDisplayString, createElementVNode, vModelText, withDirectives,
+      Fragment, openBlock, createElementBlock
+    } from "https://esm.sh/vue";
+    import { createApp, ref } from "https://esm.sh/vue";
+
+    const App = {
+      setup() {
+        return { msg: ref("Hello World!") };
+      },
+      render(_ctx, _cache, $props, $setup, $data, $options) {
+        return (
+          openBlock(),
+          createElementBlock(Fragment, null, [
+            createElementVNode("h1", null, toDisplayString($setup.msg), 1),
+            withDirectives(createElementVNode("input", {
+              "onUpdate:modelValue": ($event) => ($setup.msg = $event)
+            }, null, 512), [[vModelText, $setup.msg]])
+          ], 64)
+        );
+      }
+    };
+
+    createApp(App).mount("#app");
+  </script>
+</head>
+<body>
+  <div id="app"></div>
+</body>
+</html>
