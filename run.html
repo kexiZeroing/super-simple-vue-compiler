@@ -3,32 +3,48 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>Compiled Vue SFC Demo</title>
+  <style>
+    h1 { color: red }
+  </style>
   <script type="module">
-    import {
-      toDisplayString, createElementVNode, vModelText, withDirectives,
-      Fragment, openBlock, createElementBlock
+    import { ref, createApp } from "https://esm.sh/vue";
+    import { 
+      toDisplayString as _toDisplayString,
+      createElementVNode as _createElementVNode,
+      vModelText as _vModelText,
+      withDirectives as _withDirectives,
+      Fragment as _Fragment,
+      openBlock as _openBlock,
+      createElementBlock as _createElementBlock
     } from "https://esm.sh/vue";
-    import { createApp, ref } from "https://esm.sh/vue";
 
-    const App = {
+    // Your compiled component
+    const __sfc__ = {
       setup() {
-        return { msg: ref("Hello World!") };
-      },
-      render(_ctx, _cache, $props, $setup, $data, $options) {
-        return (
-          openBlock(),
-          createElementBlock(Fragment, null, [
-            createElementVNode("h1", null, toDisplayString($setup.msg), 1),
-            withDirectives(createElementVNode("input", {
-              "onUpdate:modelValue": ($event) => ($setup.msg = $event)
-            }, null, 512), [[vModelText, $setup.msg]])
-          ], 64)
-        );
+        const msg = ref('Hello World!')
+        return { msg }
       }
-    };
+    }
 
-    createApp(App).mount("#app");
+    // The compiled render function
+    function render(_ctx, _cache, $props, $setup, $data, $options) {
+      return (_openBlock(), _createElementBlock(_Fragment, null, [
+        _createElementVNode("h1", null, _toDisplayString($setup.msg), 1 /* TEXT */),
+        _withDirectives(_createElementVNode("input", {
+          "onUpdate:modelValue": _cache[0] || (_cache[0] = $event => (($setup.msg) = $event))
+        }, null, 512 /* NEED_PATCH */), [
+          [_vModelText, $setup.msg]
+        ])
+      ], 64 /* STABLE_FRAGMENT */))
+    }
+
+    __sfc__.render = render;
+    __sfc__.__file = "foo.vue";
+
+    // Create and mount the Vue application
+    const app = createApp(__sfc__);
+    app.mount('#app');
   </script>
 </head>
 <body>
